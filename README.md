@@ -19,3 +19,10 @@ A classic **Rock Paper Scissors** game with real-time user interactions.
 - Randomized AI-generated opponent moves  
 - Dynamic UI updates  
 - Score tracking feature 
+
+## 🔧 Installation & Setup  
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/0Divyanshu0/mini-projects-website.git
+   cd mini-projects-website
