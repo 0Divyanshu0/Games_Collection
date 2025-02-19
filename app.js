@@ -1,88 +1,83 @@
-let boxes = document.querySelectorAll(".box");
-let resetbtn = document.querySelector(".reset");
-let turn0 = true;
-let newgamebtn = document.querySelector(".newgame");
-let msgdiv = document.querySelector(".Msg");
-let winnerText = document.querySelector(".Winnertext");
+//Entire JS code is following the moludarity concept
 
-// Enable all buttons and hide the message
-const buttonenabled = () => {
-    boxes.forEach(box => {
-        box.disabled = false;
-        box.innerText = ""; // Clear the boxes for a new game
-    });
-    msgdiv.classList.add("hide");
-};
+let userScore = 0;
+let compScore = 0;
+const choices = document.querySelectorAll(".choice");
+const msg = document.querySelector("#msg");
+const countUserWin = document.querySelector("#user-score");
+const countCompWin = document.querySelector("#comp-score");
 
-// Reset game function
-const resetgame = () => {
-    turn0 = true;
-    buttonenabled();
-};
+// Random function for computer to generate a choice from the 3
+const genCompChoice = () => {
+    const options = ["rock", "paper", "scissors"];
+    const randIdx = Math.floor(Math.random() * options.length);
+    return options[randIdx];
+}
 
-// Create 2-D array of winning patterns
-const winningpattern = [
-    [0, 1, 2],
-    [0, 3, 6],
-    [0, 4, 8],
-    [1, 4, 7],
-    [2, 5, 8],
-    [2, 4, 6],
-    [3, 4, 5],
-    [6, 7, 8]
-];
+// If game drawn
+const drawGame = () => {
+    console.log("Game Drawn");
+    msg.style.backgroundColor = "rgb(37, 74, 55)";
+    msg.innerText = "It was a DRAW!";
+    
+}
 
-// Check if we have a winner
-const checkwinner = () => {
-    for (let pattern of winningpattern) {
-        let patternvalue1 = boxes[pattern[0]].innerText;
-        let patternvalue2 = boxes[pattern[1]].innerText;
-        let patternvalue3 = boxes[pattern[2]].innerText;
-        if (patternvalue1 !== "" && patternvalue2 !== "" && patternvalue3 !== "") {
-            if (patternvalue1 === patternvalue2 && patternvalue2 === patternvalue3) {
-                namewinner(patternvalue1);
-            }
-        }
+
+//To show Winner
+const showWinner = (userWin,userChoice,compChoice) => {
+    if (userWin)
+    {
+        msg.innerText = `You WON! Your ${userChoice} beats ${compChoice}`;
+        msg.style.backgroundColor = "#702a9e";
+        userScore++;
     }
-    // Check for a draw
-    const isDraw = [...boxes].every(box => box.innerText !== "");
-    if (isDraw) {
-        winnerText.innerText = "It's a Draw!";
-        msgdiv.classList.remove("hide");
+    else
+    {
+        msg.style.backgroundColor = "#ca2727";
+        compScore++;
+        msg.innerText = `You LOST! ${compChoice} beats your ${userChoice}`;
     }
-};
+    // Update the score display
+    countUserWin.innerText = userScore;
+    countCompWin.innerText = compScore;
+}
 
 
-
-// Disabling the buttons after the winner is declared
-const buttondisabled = () => {
-    boxes.forEach(box => {
-        box.disabled = true;
-    });
-};
-
-// Display the winner
-const namewinner = (winner) => {
-    winnerText.innerText = `Congrats 🎉! Winner is ${winner}`;
-    msgdiv.classList.remove("hide");
-    buttondisabled();
-};
-
-// Add event listener for each box
-boxes.forEach(box => {
-    box.addEventListener('click', () => {
-        if (turn0) {
-            box.innerText = "O";
-            turn0 = false;
-        } else {
-            box.innerText = "X";
-            turn0 = true;
+// Logic of win or loss
+const playGame = (userChoice) => {
+    const compChoice = genCompChoice();
+    if (userChoice === compChoice)
+    {
+        // Game drawn
+        drawGame();
+    }
+    else
+    {
+        let userWin = true;
+        if (userChoice === "rock")
+        {
+            //scissors,paper
+            userWin = compChoice === "paper" ? false : true;
         }
-        box.disabled = true;
-        checkwinner();
+        else if (userChoice === "paper")
+        {
+            //rock,scissors
+            userWin = compChoice === "scissors" ? false : true;
+        }
+        else
+        {
+            //rock,paper
+            compChoice === "rock" ? false : true;
+        }
+        showWinner(userWin,userChoice,compChoice);
+    }
+    
+    
+}
+
+choices.forEach((choice) => {
+    choice.addEventListener("click", () => {
+        const userChoice = choice.getAttribute("id");
+        playGame(userChoice);
     });
 });
-
-//reset game and new game button when clicked it will reset the game.
-newgamebtn.addEventListener('click', resetgame);
-resetbtn.addEventListener('click', resetgame);

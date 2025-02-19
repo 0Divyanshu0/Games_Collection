@@ -1,75 +1,81 @@
-* {
-margin: 0;
-padding: 0;
+*{
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
-
-
-
-body{
-    background-color:rgb(44, 115, 91);
-    text-align: center;    
+h1{
+    background-color: rgb(37, 74, 55);
+    color: #fff;
+    height: 5rem;
+    line-height: 5rem;
+    text-align: center;
+    
 }
-.container
+.choice
 {
-    height: 70vh;
+    height: 165px;
+    width: 165px;
+    border-radius: 50%;
     display: flex;
-    /* flex-wrap: wrap; */
     justify-content: center;
     align-items: center;
+
 }
-.game{
-    height: 60vmin;
-    width: 60vmin;
+.choice:hover
+{
+    opacity: 0.5;
+    cursor: pointer;
+}
+img
+{
+    height: 150;
+    width: 150;
+    object-fit:cover;
+    border-radius: 50%;
+}
+
+.choices{
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1.5vmin;
+    gap: 3rems;
+    margin-top: 3rem;
 
 }
-.box{
-    height: 18vmin;
-    width: 18vmin;
-    border: none;
-    border-radius: 1rem;
-    color: black;
-    font-size: 8vmin;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 1.5);
-    background-color: darkgray;
-    /* display: flex;
-    flex-wrap: wrap;
+.score-board{
+    display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
+    font-size: 2rem;
+    margin-top: 3rem;
+    gap: 5rem;
+
 }
-.reset{
-    padding: 1rem;
+#user-score,
+#comp-score
+{
+font-size: 1rem;
+}
+.msg-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+#msg {
+    background-color: rgb(37, 74, 55);
+    color: #fff;
+    height: 1rem;
     font-size: 1.5rem;
-    background-color: brown;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 1rem;
-    color: aliceblue;
-    border: none;
-}
-.newgame{
     padding: 1rem;
-    font-size: 1.5rem;
-    background-color: brown;
-    border-radius: 1rem;
-    color: aliceblue;
-    border: none;
+    text-align: center;
 }
-.hide{
-    display: none;
-}
-.msg{
-    height: 30vmin;
-}
-.reset:hover, .newgame:hover {
-    background-color: darkred;
-    cursor: pointer;
+body{
+    background-color: antiquewhite;
 }
 
-.box:hover {
-    background-color: lightgray;
-    cursor: pointer;
-}
+
 
